@@ -1,10 +1,9 @@
-package day2
-
+import day2.Day2
 import org.junit.Test
 import kotlin.test.assertEquals
 
 
-internal class Day2KtTest {
+internal class Day2Test {
 
     @Test
     fun solvePartOne() {
