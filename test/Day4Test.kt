@@ -1,4 +1,4 @@
-import day4.Day4
+import day04.Day4
 import org.junit.Test
 
 import org.junit.Assert.*

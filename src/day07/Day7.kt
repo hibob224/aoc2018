@@ -1,4 +1,4 @@
-package day7
+package day07
 
 import java.io.File
 
@@ -15,7 +15,7 @@ object Day7 {
     private const val extraTime = 60 // 0 for example
 
     fun solvePartOne(): String {
-        val instructions = File("src/day7/input.txt").readLines().map {
+        val instructions = File("src/day07/input.txt").readLines().map {
             val (one, two) = pattern.find(it)!!.destructured
             one to two
         }
@@ -43,7 +43,7 @@ object Day7 {
     }
 
     fun solvePartTwo(): Int {
-        val instructions = File("src/day7/input.txt").readLines().map {
+        val instructions = File("src/day07/input.txt").readLines().map {
             val (one, two) = pattern.find(it)!!.destructured
             one to two
         }

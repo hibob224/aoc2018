@@ -1,4 +1,4 @@
-package day4
+package day04
 
 import utils.orZero
 import java.io.File
@@ -51,7 +51,7 @@ object Day4 {
 
     private fun readAndSortLogs(): List<LogLine> {
         val pattern = """\[\d+-\d+-\d+ \d+:(\d+)] \D+(\d+)?""".toRegex()
-        return File("src/day4/input.txt").readLines().sorted().map { line ->
+        return File("src/day04/input.txt").readLines().sorted().map { line ->
             pattern.find(line)?.let {
                 val (min, guardId) = it.destructured
                 val logType = when {

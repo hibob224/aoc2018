@@ -1,4 +1,4 @@
-package day8
+package day08
 
 import utils.orZero
 import java.io.File
@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 
 object Day8 {
 
-    private val data = File("src/day8/input.txt").readText().split(" ").map { it.toInt() }
+    private val data = File("src/day08/input.txt").readText().split(" ").map { it.toInt() }
     private val dataStack = ArrayDeque<Int>(data)
     private val nodes = mutableListOf<Node>()
 

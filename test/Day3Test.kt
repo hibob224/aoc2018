@@ -1,4 +1,4 @@
-import day3.Day3
+import day03.Day3
 import org.junit.Test
 import kotlin.test.assertEquals
 

@@ -1,4 +1,4 @@
-package day6
+package day06
 
 import java.io.File
 import java.lang.Math.abs
@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 object Day6 {
 
     fun solvePartOne(): Int {
-        val coords = File("src/day6/input.txt").readLines().map {
+        val coords = File("src/day06/input.txt").readLines().map {
             val split = it.split(", ")
             Pair(split[0].toInt(), split[1].toInt())
         }
@@ -40,7 +40,7 @@ object Day6 {
     }
 
     fun solvePartTwo(): Int {
-        val coords = File("src/day6/input.txt").readLines().map {
+        val coords = File("src/day06/input.txt").readLines().map {
             val split = it.split(", ")
             Pair(split[0].toInt(), split[1].toInt())
         }

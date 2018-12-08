@@ -1,4 +1,4 @@
-import day5.Day5
+import day05.Day5
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

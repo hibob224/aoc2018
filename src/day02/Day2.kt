@@ -1,4 +1,4 @@
-package day2
+package day02
 
 import utils.then
 import java.io.File
@@ -14,7 +14,7 @@ object Day2 {
     fun solvePartOne(): Int {
         var appearsTwice = 0
         var appearsThrice = 0
-        File("src/day2/input.txt").readLines().asSequence().map { it.groupingBy { it }.eachCount() }.forEach { group ->
+        File("src/day02/input.txt").readLines().asSequence().map { it.groupingBy { it }.eachCount() }.forEach { group ->
             if (group.containsValue(2)) {
                 appearsTwice++
             }
@@ -26,7 +26,7 @@ object Day2 {
     }
 
     fun solvePartTwo(): String {
-        val ids = File("src/day2/input.txt").readLines().asSequence()
+        val ids = File("src/day02/input.txt").readLines().asSequence()
         ids.forEach { idOne ->
             ids.forEach { idTwo ->
                 val zipped = idOne.zip(idTwo)

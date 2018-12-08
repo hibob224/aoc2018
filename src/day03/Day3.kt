@@ -1,4 +1,4 @@
-package day3
+package day03
 
 import java.io.File
 import java.lang.IllegalArgumentException
@@ -50,7 +50,7 @@ object Day3 {
      * Parses the input file and creates a list of [Claim] for each row using regex to parse the required variables
      */
     private fun parseClaims(): List<Claim> {
-        return File("src/day3/input.txt").readLines().map { line ->
+        return File("src/day03/input.txt").readLines().map { line ->
             claimPattern.find(line)?.let {
                 val (id, x, y, w, h) = it.destructured
                 Claim(id.toInt(), x.toInt(), y.toInt(), w.toInt(), h.toInt())

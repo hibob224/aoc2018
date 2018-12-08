@@ -1,4 +1,4 @@
-package day5
+package day05
 
 import utils.orZero
 import java.io.File
@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
 }
 
 object Day5 {
-    private val actualInput = File("src/day5/input.txt").readText()
+    private val actualInput = File("src/day05/input.txt").readText()
 
     fun solvePartOne(input: String = actualInput): Int {
         val result = ArrayDeque<Char>(actualInput.length)
