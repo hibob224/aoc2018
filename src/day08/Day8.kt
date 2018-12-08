@@ -1,6 +1,7 @@
 package day08
 
 import utils.orZero
+import utils.then
 import java.io.File
 import java.util.*
 
@@ -16,9 +17,7 @@ object Day8 {
     private val nodes = mutableListOf<Node>()
 
     init {
-        do {
-            nodes.add(parseNode())
-        } while (dataStack.isNotEmpty())
+        nodes.add(parseNode())
     }
 
     fun solvePartOne(): Int {
@@ -45,12 +44,6 @@ class Node {
     val allChildren: List<Node>
         get() = childNodes + childNodes.flatMap { it.allChildren }
 
-    fun value(): Int {
-        if (childNodes.isEmpty()) {
-            return metaData.sum()
-        }
-        var value = 0
-        metaData.forEach { value += childNodes.getOrNull(it - 1)?.value().orZero() }
-        return value
-    }
+    fun value(): Int =
+            childNodes.isEmpty() then metaData.sum() ?: metaData.sumBy { childNodes.getOrNull(it - 1)?.value().orZero() }
 }
