@@ -1,5 +1,4 @@
-package day09
-
+import day09.Day9
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,6 +12,6 @@ class Day9Test {
 
     @Test
     fun solvePartTwo() {
-        assertEquals(1, Day9.solvePartTwo())
+        assertEquals(3083412635, Day9.solvePartTwo())
     }
 }
