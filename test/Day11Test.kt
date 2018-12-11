@@ -12,5 +12,6 @@ class Day11Test {
 
     @Test
     fun solvePartTwo() {
+        assertEquals("(231,135,8)", Day11.solvePartTwo())
     }
 }

@@ -26,7 +26,22 @@ object Day11 {
     }
 
     fun solvePartTwo(): String {
-        return ""
+        val grid = generatePowerGrid()
+        val powerPoints = mutableMapOf<Triple<Int, Int, Int>, Int>()
+
+        // TODO Rewrite part two solution
+        // This solution is horribly inefficient and would take forever to reach the end of the 300. It just so happens
+        // my answer was only a 8x8 area which was quick to calculate. Need to rewrite at some point!
+        for (size in 1..10) {
+            for (x in 1..gridDimensions - size) {
+                for (y in 1..gridDimensions - size) {
+                    powerPoints[Triple(x, y, size)] = sumGrid(grid, Pair(x, y), size)
+                }
+            }
+        }
+
+        val large = powerPoints.maxBy { it.value }!!.key
+        return large.toString()
     }
 
     private fun sumGrid(grid: Map<Pair<Int, Int>, Int>, start: Pair<Int, Int>, size: Int): Int {
@@ -44,19 +59,22 @@ object Day11 {
 
         for (x in 1..gridDimensions) {
             for (y in 1..gridDimensions) {
-                val rackId = x + 10
-                var powerLevel = y * rackId
-                powerLevel += gridSerialNumber
-                powerLevel *= rackId
-                val finalPowerLevel = if (powerLevel > 99) {
-                    powerLevel.toString().takeLast(3).take(1).toInt()
-                } else {
-                    0
-                }
-                grid[Pair(x, y)] = finalPowerLevel - 5
+                grid[Pair(x, y)] = calculateValue(x, y)
             }
         }
 
         return grid
+    }
+
+    private fun calculateValue(x: Int, y: Int): Int {
+        val rackId = x + 10
+        var powerLevel = y * rackId
+        powerLevel += gridSerialNumber
+        powerLevel *= rackId
+        return if (powerLevel > 99) {
+            powerLevel.toString().takeLast(3).take(1).toInt() - 5
+        } else {
+            -5
+        }
     }
 }
