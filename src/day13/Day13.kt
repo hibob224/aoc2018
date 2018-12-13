@@ -1,32 +1,24 @@
 package day13
 
-import utils.then
 import java.io.File
 import java.lang.IllegalArgumentException
 
 fun main(args: Array<String>) {
-    println("Part one: ${Day13.solvePartOne()}")
-    println("Parse two: ${Day13.solvePartTwo()}")
-}
+    val network = Network(File("src/day13/input.txt").readLines())
+    network.simulate()
+    val firstCrash = network.crashSites.first()
+    val lastCart = network.carts.first()
 
-object Day13 {
-
-    private val file = File("src/day13/input.txt")
-
-    fun solvePartOne() {
-        Network(file.readLines()).tick()
-    }
-
-    fun solvePartTwo(): String {
-        return ""
-    }
+    println("Part one: ${firstCrash.first},${firstCrash.second}")
+    println("Parse two: ${lastCart.x},${lastCart.y}")
 }
 
 class Network(lines: List<String>) {
 
-    val trackGrid = mutableMapOf<Pair<Int, Int>, Track>()
+    private var trackSize = 0
     val carts = mutableListOf<Cart>()
-    var trackSize = 0
+    val crashSites = mutableListOf<Pair<Int, Int>>()
+    val trackGrid = mutableMapOf<Pair<Int, Int>, TrackType>()
 
     init {
         lines.forEachIndexed { y, line ->
@@ -47,27 +39,28 @@ class Network(lines: List<String>) {
                         carts.add(Cart(x, y, track))
                     }
 
-                    trackGrid[coord] = Track(x, y, it)
+                    trackGrid[coord] = trackType
                 }
                 trackSize = maxOf(x, trackSize)
             }
         }
     }
 
-    fun tick() {
+    fun simulate() {
         do {
             carts.filterNot { it.crashed }
-                    .sortedBy { it.x + it.y *  trackSize}
+                    .sortedBy { it.x + it.y * trackSize}
                     .forEach { it.tick() }
-        } while (carts.find { it.crashed } == null)
 
-        val cart = carts.find { it.crashed }
-
-        println("${cart!!.x},${cart.y}")
+            carts.removeAll { it.crashed }
+        } while (carts.size > 1)
     }
 
-    inner class Cart(var x: Int, var y: Int, cart: Char,
-                     var nextIntersection: IntersectionTurn = IntersectionTurn.LEFT, var crashed: Boolean = false) {
+    inner class Cart(var x: Int,
+                     var y: Int,
+                     cart: Char,
+                     private var nextIntersection: IntersectionTurn = IntersectionTurn.LEFT,
+                     var crashed: Boolean = false) {
 
         private var direction = when (cart) {
             '>' -> Direction.RIGHT
@@ -87,7 +80,7 @@ class Network(lines: List<String>) {
                 Direction.DOWN -> y++
             }
 
-            when (trackGrid[Pair(x, y)]!!.type) {
+            when (trackGrid[Pair(x, y)]) {
                 TrackType.INTERSECTION -> {
                     when (nextIntersection) {
                         IntersectionTurn.LEFT -> {
@@ -134,7 +127,7 @@ class Network(lines: List<String>) {
             carts.filter { it.x == x && it.y == y }
                     .takeIf { it.size > 1 }
                     ?.forEach {
-                        println("Crash: $x, $y")
+                        crashSites.add(Pair(x, y))
                         it.crashed = true
                     }?.let {
                         return false
@@ -156,5 +149,3 @@ enum class Direction {
 enum class IntersectionTurn {
     STRAIGHT, LEFT, RIGHT
 }
-
-class Track(val x: Int, val y: Int, val type: TrackType)
