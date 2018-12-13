@@ -29,11 +29,11 @@ object Day12 {
     fun solvePartOne(): Int = performGenerations(20).filter { it.value == '#' }.keys.sum().orZero()
 
     fun solvePartTwo(): Long {
-        val stateMap = performGenerations(200)
+        val stateMap = performGenerations(101)
 
         var total = 0L
         stateMap.filter { it.value == '#' }.keys.forEach {
-            total += it + (50000000000 - 200)
+            total += it + (50000000000 - 101)
         }
 
         return total
