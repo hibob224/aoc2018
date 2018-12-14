@@ -21,16 +21,11 @@ object Day14 {
     }
 
     fun solvePartTwo(): Int {
-        // Reset
-        input = mutableListOf(3, 7)
-        elfOne = 0
-        elfTwo = 1
-
         do {
             performRecipes()
-        } while (!input.joinToString("").contains(practiceRecipes.toString()))
+        } while (practiceRecipes.toString() !in input.takeLast(10).joinToString(""))
 
-        return input.joinToString("").indexOf(practiceRecipes.toString())
+        return input.size - 7
     }
 
     private fun performRecipes() {
@@ -45,16 +40,5 @@ object Day14 {
         while (elfTwo >= input.size) {
             elfTwo -= input.size
         }
-    }
-
-    private fun printBoard() {
-        input.forEachIndexed { index, i ->
-            when {
-                elfOne == index -> print("($i) ")
-                elfTwo == index -> print("[$i] ")
-                else -> print("$i ")
-            }
-        }
-        println()
     }
 }
