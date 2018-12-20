@@ -35,7 +35,26 @@ object Day19 {
     }
 
     fun solvePartTwo(): Int {
-        return solve(1)
+        val lines = file.readLines()
+        val instructions = mutableListOf<Instruction>()
+
+        (1 until lines.size).forEach {
+            val (instruction, a, b, c) = instructionPattern.find(lines[it])!!.destructured
+            instructions.add(Instruction(instruction, a.toInt(), b.toInt(), c.toInt()))
+        }
+
+        val ip = lines.first().split("#ip ")[1].toInt()
+        val register = IntArray(6)
+        register[0] = 1
+
+        repeat(100) {
+            val instruction = instructions[register[ip]]
+            opcodes[instruction.op]?.invoke(register, instruction)
+            register[ip]++
+        }
+
+        val factorTarget = register.maxBy { it }!!
+        return (1..factorTarget).filter { factorTarget % it == 0 }.sum()
     }
 
     private fun solve(reg: Int = 0): Int {

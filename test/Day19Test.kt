@@ -12,5 +12,6 @@ class Day19Test {
 
     @Test
     fun solvePartTwo() {
+        assertEquals(18741072, Day19.solvePartTwo())
     }
 }
