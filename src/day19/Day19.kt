@@ -11,8 +11,8 @@ fun main(args: Array<String>) {
 object Day19 {
 
     private val file = File("src/day19/input.txt")
-    private val instructionPattern = """(\w+) (\d+) (\d+) (\d+)""".toRegex()
-    private val opcodes = mapOf(
+    val instructionPattern = """(\w+) (\d+) (\d+) (\d+)""".toRegex()
+    val opcodes = mapOf(
             "addr" to { inp: IntArray, op: Instruction -> inp[op.c] = inp[op.a] + inp[op.b] },
             "addi" to { inp: IntArray, op: Instruction -> inp[op.c] = inp[op.a] + op.b },
             "mulr" to { inp: IntArray, op: Instruction -> inp[op.c] = inp[op.a] * inp[op.b] },
